@@ -1,0 +1,257 @@
+@import "tailwindcss";
+:root {
+	--background: #141414;
+	--foreground: #171717;
+}
+
+body {
+	background: var(--background);
+	color: var(--foreground);
+	font-family: var(--font-bai-jamjuree);
+}
+
+.shape {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(260deg, #0BC4E5 18.6%, #81ECFF 35.21%, rgba(22, 220, 255, 0.82) 108.59%);
+}
+.box-shape {
+	transition: filter 0.2s linear;
+}
+
+.box-shape:hover {
+	filter: drop-shadow(0px 0px 20px #15ffff4b)
+}
+
+.box-shape.wish:hover {
+	filter: drop-shadow(0px 0px 20px #ffffffd0)
+}
+
+.box-shape.whatsapp:hover {
+	filter: drop-shadow(0px 0px 20px #15ff2169)
+}
+
+.box-shape.wish-recommedation:hover {
+	filter: drop-shadow(0px 0px 20px #ffffff69)
+}
+
+.shape.button-product {
+	height: 60px;
+}
+
+.shape.normal {
+	background: rgba(255, 255, 255, 0.10);
+}
+
+.shape.normal:hover {
+	background: rgba(255, 255, 255, 0.20);
+	filter:brightness(1.2);
+}
+
+.shape.whatsapp {
+	background: linear-gradient(85deg, rgba(66, 190, 28, 0.96) 24.72%, #3CFF00 59%, #53C82F 96.15%);
+}
+
+.shape.whatsapp:hover {
+	filter:brightness(1.2);
+}
+
+
+
+.shape {
+	-webkit-clip-path: polygon(0% 15px, 15px 0, 15px 0%, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+
+	clip-path: polygon(0% 15px, 15px 0, 15px 0%, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+}
+
+.shape-outline {
+	height: 60px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(260deg, #0BC4E5 18.6%, #81ECFF 35.21%, rgba(22, 220, 255, 0.82) 108.59%);
+}
+
+.shape-outline:before {
+	content: '';
+	width: calc(100% - 2px);
+	height: 58px;
+	background: #2B2E37;
+	display: block;
+	position: absolute;
+	top: 1px;
+	left: 1px;
+	z-index: -1;
+	transition: all 0.2s linear;
+}
+
+.shape-outline:hover {
+	color: black;
+}
+
+.shape-outline:hover svg path {
+	fill: black !important;
+} 
+
+
+.shape-outline:hover:before {
+	transition: all 0.2s linear;
+	background: linear-gradient(260deg, #0BC4E5 18.6%, #81ECFF 35.21%, rgba(22, 220, 255, 0.82) 108.59%);
+	filter:brightness(1.2) !important;
+}
+
+
+.shape-outline,
+.shape-outline:before {
+	-webkit-clip-path: polygon(0% 15px, 15px 0, 15px 0%, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+
+	clip-path: polygon(0% 15px, 15px 0, 15px 0%, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+}
+
+.clip-path-element {
+	-webkit-clip-path: polygon(0% 30px, 30px 0, 30px 0%, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+
+	clip-path: polygon(0% 30px, 30px 0, 30px 0%, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+}
+
+.clip-path-images {
+	-webkit-clip-path: polygon(0% 14px, 14px 0, 14px 0%, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+
+	clip-path: polygon(0% 14px, 14px 0, 14px 0%, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+}
+
+
+.custom-dropdown {
+	min-width: 12rem;
+}
+
+.swiper-wrapper {
+	width: 0 !important;
+}
+
+.swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	/* background: #fff; */
+
+	/* Center slide text vertically */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.swiper-slide img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+
+.swiper {
+	width: 100%;
+	height: 0;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.swiper-slide {
+	background-size: cover;
+	background-position: center;
+}
+
+.mySwiper2 {
+	width: 100%;
+	padding-bottom: 56.25% !important;
+}
+
+
+.mySwiper {
+	height: 20%;
+	box-sizing: border-box;
+	/* padding: 10px 0; */
+}
+
+.mySwiper .swiper-slide {
+	width: 280px;
+	height: 100%;
+	opacity: 0.4;
+	display: flex;
+	align-items: center;
+}
+
+.mySwiper .swiper-slide-thumb-active {
+	opacity: 1;
+}
+
+.mySwiper .swiper-slide img {
+	display: block;
+	width: 100%;
+	height: 160px !important;
+	
+	/* padding-bottom: 56.25% !important; */
+	object-fit: cover;
+}
+
+.swiper-scrollbar {
+	position: relative;
+	z-index:100;
+	opacity: 1 !important;
+	background: rgba(3, 225, 233, 0.11);
+	border-radius: 10px;
+	margin-top: 20px;
+}
+
+.swiper-scrollbar-drag {
+	height: 10px;
+	background: rgba(3, 225, 233, 0.534);
+	border-radius: 10px;
+}
+
+.recommendation {
+  content: '';
+  position: absolute;
+  width: 100.8%;
+  height: 106.8%;
+  background:#0EDAFE;
+  top: calc(50% + 2px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-clip-path: polygon(0% 30px, 30px 0, 30px 0%, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+	clip-path: polygon(0% 30px, 30px 0, 30px 0%, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.recommendation-content:hover > div {
+  background: #30434D;
+}
+
+.recommendation-content:hover + .recommendation {
+  opacity: 1;
+}
+
+
+
+
+@media (max-width: 720px) {
+	.mySwiper2.clip-path-element {
+		clip-path: initial;
+	}
+	
+	.mySwiper { 
+		padding: 0 20px !important;
+	}
+
+	.mySwiper .swiper-slide {
+		width: 180px;
+	}
+
+	.mySwiper .swiper-slide img { 
+		height: 100px !important;
+	}
+}
