@@ -235,7 +235,12 @@ body {
   opacity: 1;
 }
 
-
+.react-tooltip {
+	width: 170px !important; 
+	font-size: 12px !important;
+	padding: 6px !important;
+	text-align: center !important;
+}
 
 
 @media (max-width: 720px) {

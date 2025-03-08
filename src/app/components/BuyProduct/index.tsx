@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { Tooltip as ReactTooltip } from "react-tooltip";
+
 import Image from "next/image";
 
 import StarSVG from "@/assets/star.svg";
@@ -46,8 +48,8 @@ export default function BuyProduct() {
     return (
         <div className="w-full md:p-8 p-5 backdrop-blur-md" style={{ background: "rgba(49, 55, 66, 0.80)" }}>
             <div className="flex gap-x-4 mb-6">
-                <span className="md:text-md text-sm py-2 px-4 font-semibold text-black" style={{ background: "linear-gradient(259deg, #0BC4E5 -24.82%, #67E8FF 18.51%, rgba(22, 220, 255, 0.82) 108.82%)" }}>Pré-venda</span>
-                <span className="md:text-md text-sm py-2 px-4 border border-gray-400">Lançamento: 03/04/2024</span>
+                <span className="md:text-md text-sm py-2 px-4 font-semibold text-black" style={{ background: "linear-gradient(259deg, #0BC4E5 -24.82%, #67E8FF 18.51%, rgba(22, 220, 255, 0.82) 108.82%)" }}>Pre-order</span>
+                <span className="md:text-md text-sm py-2 px-4 border border-gray-400">Release: 03/04/2024</span>
             </div>
             <div className="flex items-center gap-x-2 mb-2">
                 <StarSVG />
@@ -58,16 +60,19 @@ export default function BuyProduct() {
                 <span>(5)</span>
             </div>
             <h1 className="md:text-2xl text-xl font-semibold mb-2">{"Marvel's"} Spider-Man 2 Steam Offline</h1>
-            <p className="md:text-lg text-sm text-gray-100 mb-6">Spider-Man 2 traz ação intensa, mundo aberto e vilões épicos. Viva a experiência do Homem-Aranha em Nova York!</p>
+            <p className="md:text-lg text-sm text-gray-100 mb-6">Spider-Man 2 brings intense action, an open world, and epic villains. Experience Spider-Man in New York City!</p>
             <div
                 className="flex py-3 2xl:px-6 md:px-4 px-2 justify-between gap-4 mb-6"
                 style={{ background: "linear-gradient(85deg, rgba(11, 196, 229, 0.24) 11.1%, rgba(0, 216, 255, 0.50) 70.51%, #02D9FF 113.22%)" }}
             >
-                <div className="flex-1 flex justify-center items-center font-medium md:text-sm text-xs"><LightningSVG className="mr-2" /><span>Entrega <br />Instantânea</span></div>
-                <div className="whitespace-nowrap px-2 flex-auto flex justify-center items-center font-medium md:text-sm text-xs border border-t-0 border-b-0 border-[#0BC4E5]"><SupportAgentSVG className="mr-2" /><span>Suporte das<br /> 14h às 23h.</span></div>
-                <div className="flex-1 flex justify-center items-center font-medium md:text-sm text-xs"><GlobalSVG className="mr-2" /><span>Region <br />Global</span></div>
+                <div className="flex-1 flex justify-center items-center font-medium md:text-sm text-[10px]" data-tooltip-id="my-tooltip-1"><LightningSVG className="mr-2" /><span>Instant <br />Delivery</span></div>
+                <ReactTooltip id="my-tooltip-1" className="w-24" place="top" content="The account with the game will be delivered instantly."/>
+                <div className="whitespace-nowrap px-2 flex-auto flex justify-center items-center font-medium md:text-sm text-[10px] border border-t-0 border-b-0 border-[#0BC4E5]" data-tooltip-id="my-tooltip-2"><SupportAgentSVG className="mr-2" /><span>Support from<br /> 2PM to 11PM</span></div>
+                <ReactTooltip id="my-tooltip-2" place="top" content="Lisbon time."/>
+                <div className="flex-1 flex justify-center items-center font-medium md:text-sm text-[10px]" data-tooltip-id="my-tooltip-3"><GlobalSVG className="mr-2" /><span>Global <br />Region</span></div>
+                <ReactTooltip id="my-tooltip-3" place="top" content="The game works worldwide."/>
             </div>
-            <p className="text-base font-medium mb-4 ">Selecione as opções do Período de aluguel:</p>
+            <p className="text-base font-medium mb-4">Select rental period options:</p>
             <div className="border border-white mb-5 ">
                 <div className="flex">
                     <div className="border border-t-0 border-l-0 border-b-0 border-white/20 py-5 px-6 flex gap-2 ">
@@ -98,24 +103,24 @@ export default function BuyProduct() {
             </div>
             <div className="flex flex-col gap-3">
                 <div className="box-shape">
-                    <button className="w-full bg-[#0BC4E5]  cursor-pointer h-14 shape button-product font-semibold text-black gap-2"><CartSVG />Compre agora mesmo</button>
+                    <button className="w-full bg-[#0BC4E5]  cursor-pointer h-14 shape button-product font-semibold text-black gap-2"><CartSVG />Buy Now</button>
                 </div>
                 <div className="box-shape">
-                    <button className="w-full bg-[#0BC4E5]  cursor-pointer h-14 shape-outline button-product font-semibold text-[#00D8FF] gap-2"><UserGuestSVG />Comprar como convidado</button>
+                    <button className="w-full bg-[#0BC4E5]  cursor-pointer h-14 shape-outline button-product font-semibold text-[#00D8FF] gap-2"><UserGuestSVG />Buy now as Guest</button>
                 </div>
                 <div 
                     className="box-shape wish"
                     onMouseEnter={() => setIsHoveredWish(true)}
                     onMouseLeave={() => setIsHoveredWish(false)}
                 >
-                    <button className="w-full bg-[#0BC4E5]  cursor-pointer h-14 shape normal button-product font-medium gap-2">{isHoveredWish ? <WishHeartRedOutlineSVG /> : <WishHeartSVG />}Para a lista de desejos</button>
+                    <button className="w-full bg-[#0BC4E5]  cursor-pointer h-14 shape normal button-product font-medium gap-2">{isHoveredWish ? <WishHeartRedOutlineSVG /> : <WishHeartSVG />}Add to Wishlist</button>
                 </div>
             </div>
             <div className="border border-white opacity-20 my-8"></div>
             <div className="box-shape whatsapp">
-                <button className="w-full bg-[#0BC4E5] cursor-pointer h-14 shape whatsapp font-medium font-semibold text-black gap-2"><WhatsappSVG />Faça sua pergunta via Whatsapp</button>
+                <button className="w-full bg-[#0BC4E5] cursor-pointer h-14 shape whatsapp font-medium font-semibold text-black gap-2"><WhatsappSVG />Ask your question via WhatsApp</button>
             </div>
-            <p className="text-base font-medium py-4">Checkout seguro garantido.</p>
+            <p className="text-base font-medium py-4">Secure checkout guaranteed.</p>
             <div className="flex flex-wrap gap-2 mr-10">
                 <Image src={LogoPayments01} alt="stripe" />
                 <Image src={LogoPayments02} alt="mastercard" />
