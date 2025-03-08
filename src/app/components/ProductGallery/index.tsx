@@ -61,10 +61,10 @@ export default function ProductGallery() {
             <Swiper
                 
                 style={{
-                // "--swiper-navigation-color": "#fff",
-                // "--swiper-navigation-size": "30px",
+                "--swiper-navigation-color": "#fff",
+                "--swiper-navigation-size": "30px",
                 background: "rgba(49, 55, 66, 0.80)" 
-                }}
+                } as React.CSSProperties }
                 spaceBetween={10}
                 navigation={true}
                 thumbs={{ swiper: thumbsSwiper && !thumbsSwiper?.destroyed ? thumbsSwiper : null }}
