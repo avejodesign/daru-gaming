@@ -76,6 +76,7 @@ export default function ProductGallery() {
                 }}
                 slideToClickedSlide={true} 
             >
+                {/* Adicionar video Iframe */}
                 <SwiperSlide>
                     <div className="relative" style={{ paddingBottom: "56.25%" }}>
                         <iframe

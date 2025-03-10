@@ -10,6 +10,8 @@ body {
 	font-family: var(--font-bai-jamjuree);
 }
 
+/* Copie daqui para abaixo */
+
 .shape {
 	position: relative;
 	display: flex;

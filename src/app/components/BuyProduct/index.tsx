@@ -80,6 +80,7 @@ export default function BuyProduct() {
                         PC
                     </div>
                     <div className="relative w-full z-10 ">
+                        {/* Dropdown Select */}
                         <button
                             className="flex justify-between cursor-pointer hover:bg-white/10 transition w-full font-medium py-5 px-6 rounded inline-flex items-center"
                             onClick={toggleDropdown}
