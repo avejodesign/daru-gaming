@@ -5,7 +5,11 @@
 }
 
 body {
-	background: var(--background);
+	background-image: url("../assets/background-stars.png");
+	background-repeat: no-repeat;   /* Impede a repetição da imagem */
+	background-size: cover;
+	background-position: center; 
+	background-attachment: fixed; 
 	color: var(--foreground);
 	font-family: var(--font-bai-jamjuree);
 }
@@ -59,8 +63,6 @@ body {
 .shape.whatsapp:hover {
 	filter:brightness(1.2);
 }
-
-
 
 .shape {
 	-webkit-clip-path: polygon(0% 15px, 15px 0, 15px 0%, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
@@ -117,6 +119,7 @@ body {
 	-webkit-clip-path: polygon(0% 30px, 30px 0, 30px 0%, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
 
 	clip-path: polygon(0% 30px, 30px 0, 30px 0%, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+	
 }
 
 .clip-path-images {
@@ -260,5 +263,27 @@ body {
 
 	.mySwiper .swiper-slide img { 
 		height: 100px !important;
+	}
+}
+
+.tabbar::-webkit-scrollbar {
+	display: none; /* Remove a barra de rolagem */
+}
+
+.list-library li {
+	flex: 0 1 calc(25% - 30px);
+    box-sizing: border-box; 
+}
+
+@media (max-width: 768px) {
+    .list-library li {
+      flex: 0 1 calc(33.33% - 30px); /* 3 colunas para tablet */
+    }
+  }
+
+  /* Media Query para celular (2 colunas) */
+@media (max-width: 480px) {
+	.list-library li {
+		flex: 0 1 calc(100%); /* 2 colunas para celular */
 	}
 }

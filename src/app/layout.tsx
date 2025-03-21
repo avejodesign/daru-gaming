@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${BaiJamjuree.variable} antialiased`}
+        className={`${BaiJamjuree.variable} antialiased `}
       >
         {children}
       </body>

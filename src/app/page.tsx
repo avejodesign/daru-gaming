@@ -4,8 +4,6 @@ import { useState } from "react";
 
 import Image from "next/image";
 
-import BgStars from "@/assets/background-stars.png";
-
 import BgImageProduct from "@/assets/bg-image-product.png";
 
 import StarOutlineSVG from "@/assets/star-outline.svg";
@@ -15,7 +13,7 @@ import ProductGallery from "./components/ProductGallery";
 import ProductRecommendation from "./components/ProductRecommendation";
 
 export default function Home() {
-	const [expandedAbout, setExpandedAbout] = useState(false);
+	const [expandedAbout, setExpandedAbout] = useState<boolean>(false);
 
 	const toggleExpand = () => {
 		setExpandedAbout(!expandedAbout);
@@ -23,9 +21,7 @@ export default function Home() {
   
 	return (
 		<>
-			<div className="w-full fixed">
-				<Image src={BgStars} className="w-full" alt="background-stars" />
-			</div>
+			
 			<div className="w-full" style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 80%)" }}>
 				<Image src={BgImageProduct} alt="bg-product" className="w-full md:h-[800px] h-[400px] object-cover " />
 			</div>
@@ -39,11 +35,10 @@ export default function Home() {
 							<BuyProduct />
 						</div>
 						<div className="md:p-8 p-5 backdrop-blur-md clip-path-element" style={{ background: "rgba(49, 55, 66, 0.80)" }}>
-						<h2 className="md:text-2xl text-xl font-semibold mb-6">Who viewed this product also bought</h2>
-						<div className="flex flex-col gap-6">
+							<h2 className="md:text-2xl text-xl font-semibold mb-6">Who viewed this product also bought</h2>
+							<div className="flex flex-col gap-6">
 								<ProductRecommendation />
 								<ProductRecommendation />
-
 							</div>
 						</div>
 						<div className="md:p-8 p-5 backdrop-blur-md clip-path-element" style={{ background: "rgba(49, 55, 66, 0.80)" }}>
