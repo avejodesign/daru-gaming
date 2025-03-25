@@ -81,7 +81,7 @@ export default function Orders() {
   ];
 
   return (
-    <div className="container w-full mx-auto relative text-white mt-20">
+    <div className="container w-full mx-auto relative md:px-30 text-white mt-20">
       <div className="md:p-10 p-5 backdrop-blur-md clip-path-element" style={{ background: "rgba(49, 55, 66, 0.80)" }}>
         <Tabbar />
         <div className="flex flex-col gap-6 mt-6">

@@ -287,3 +287,28 @@ body {
 		flex: 0 1 calc(100%); /* 2 colunas para celular */
 	}
 }
+
+
+/* React Skeleton */
+
+.react-loading-skeleton  {
+	border-radius: 2px;
+	display: inline-block;
+	line-height: 100%;
+	width: 100%;
+	background-color: #fff;
+	background-size: 1000px 1000px;
+	background: linear-gradient(100deg, rgba(31, 122, 138, 0.82) 0%, rgba(62, 191, 214, 0.82) 49%, rgba(31, 122, 138, 0.82) 100%);
+
+	animation: placeholderShimmer 1.5s linear infinite forwards;
+  }
+  
+  /* Skeleton animation*/
+  @keyframes placeholderShimmer {
+	0% {
+	  background-position: -500px 0;
+	}
+	100% {
+	  background-position: 500px 0;
+	}
+  }

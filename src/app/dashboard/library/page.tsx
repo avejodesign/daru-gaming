@@ -2,6 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 import Tabbar from "@/app/components/Tabbar";
 
 import Image, { StaticImageData } from "next/image";
@@ -21,6 +24,8 @@ type Products = {
 	src: StaticImageData;
 	confirmViewKey: boolean;
 };
+
+
 
 export default function Library() {
 	const [confirmPopupView, setConfirmPopupView] = useState<boolean>(false);
@@ -67,25 +72,24 @@ export default function Library() {
 			confirmViewKey: false,
 		},
 	]);
+	const [loadingState, setLoadingState] = useState(false);
 	const [productKeyConfirm, setProductKeyConfirm] = useState<number>(1);
-	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [productGetAuthcode, setProductGetAuthcode] = useState<number>(0);
 
-	const toggleDropdown = () => {
-		setIsOpen(!isOpen);
-	};
-
-	// const onOptionClicked = (value: string) => {
-	//     setProductGetAuthcode(value);
-	//     setIsOpen(false);
-	// }
-
 	function handleViewProduct(id: number, confirmViewKey: boolean) {
-		setConfirmPopupView(true);
+		setLoadingState(false)
 		setProductKeyConfirm(id);
+		setConfirmPopupView(true);
 		if (confirmViewKey) {
-			if (productGetAuthcode != id && confirmViewKey == true) {
+			if (productGetAuthcode != id) {
 				setProductGetAuthcode(id);
+				setTimeout(() => {
+					setLoadingState(true);
+				}, 1000);
+			} else {
+			setTimeout(() => {
+					setLoadingState(true);
+				}, 1000);
 			}
 		}
 	}
@@ -96,11 +100,15 @@ export default function Library() {
 		));
 		setConfirmPopupView(false);
 		setProductGetAuthcode(productKeyConfirm);
+		setTimeout(() => {
+			setLoadingState(true);
+		}, 1000);
 	}
 
 	function closeKeyAuthcode() {
 		setProductKeyConfirm(0);
 		setProductGetAuthcode(0);
+		setLoadingState(false);
 	}
 
 	useEffect(() => {
@@ -124,10 +132,10 @@ export default function Library() {
 
 	return (
 		<>
-			<div className="w-full container mx-auto mt-20 relative text-white">
+			<div className="w-full container mx-auto mt-20 md:px-30 relative text-white">
 				<div className="md:p-10 p-5 backdrop-blur-md clip-path-element" style={{ background: "rgba(49, 55, 66, 0.80)" }}>
 					<Tabbar />
-					<ul className="flex flex-wrap justify-start list-library gap-10 mt-6 relative" >
+					<ul className="flex flex-wrap justify-start list-library gap-10 md:px-0 px-10 mt-6 relative" >
 						{products.map((item, index) => (
 							<li key={index} >
 								<div className={`${item.confirmViewKey && item.id == productKeyConfirm ? "bg-cyan-300 p-4 clip-path-element cursor-pointer" : "bg-white/20 p-4 clip-path-element hover:bg-cyan-400 transition cursor-pointer"}`} onClick={() => handleViewProduct(item.id, item.confirmViewKey)}>
@@ -136,49 +144,89 @@ export default function Library() {
 										{/* Dropdown Select */}
 										<button
 											className="flex justify-between cursor-pointer hover:bg-white/10 transition w-full font-medium py-5 px-6 rounded items-center"
-											onClick={toggleDropdown}
 										>
 											{productGetAuthcode}
 										</button>
-										<ul className={`absolute ${isOpen ? 'block' : 'hidden'} w-full border bg-[#2A2F37] text-white pt-1 custom-dropdown`}>
-											test
-										</ul>
 									</div>
 								</div>
-									{productGetAuthcode == productKeyConfirm && item.id == productKeyConfirm ? (
-										<div className="h-125">
-											<div className="absolute p-10 mt-8 left-0 z-100 w-full border-16 border-cyan-300 bg-cyan-400/20">
-												<div className="flex justify-between mb-12">
-													<h2 className="text-4xl font-semibold">EA Sports FC 24 PC Steam Offline EA App</h2>
-													<CloseSVG onClick={() => closeKeyAuthcode()} className="cursor-pointer" />
+								{productGetAuthcode == productKeyConfirm && item.id == productKeyConfirm ? (
+									<div className="md:h-125 h-180">
+										<div className="absolute md:p-10 p-6 mt-8 left-0 z-100 w-full md:border-16 border-10 border-cyan-300 bg-cyan-400/20">
+										{!loadingState ? (
+											<>
+												<div className="md:mb-12 mb-6">	
+													<Skeleton style={{ maxWidth: "600px", width: "90%"}} height={30} />
 												</div>
-												<div className="flex gap-8 mb-6">
+												<div className="flex md:flex-row flex-col md:gap-8 mb-6">
+													<div className="mb-4 w-full">
+														<div className="mb-2">
+															<Skeleton style={{ maxWidth: "200px", width: "90%"}} height={20} />
+														</div>
+														<Skeleton style={{ width: "100%"}} height={60} />
+													</div>
+													<div className="mb-4 w-full">
+														<div className="mb-2">
+															<Skeleton style={{ maxWidth: "200px", width: "90%"}} height={20} />
+														</div>
+														<Skeleton style={{ width: "100%"}} height={60} />
+													</div>
+												</div>
+												<div className="flex md:flex-row flex-col gap-6">
+													<div className="w-50 mr-10">
+														<div className="mb-2">
+															<Skeleton style={{  width: "90%"}} height={20} />
+														</div>
+														<Skeleton style={{ width: "100%"}} height={20} />
+													</div>
+													<div className="w-50 mr-10">
+														<div className="mb-2">
+															<Skeleton style={{  width: "90%"}} height={20} />
+														</div>
+														<Skeleton style={{ width: "100%"}} height={20} />
+													</div>
+												</div>
+												<div className="flex md:gap-6 mt-6">
+													<div className="box-shape w-60">
+														<Skeleton style={{ width: "100%"}} height={60} />	
+													</div>
+													<div className="box-shape w-60">
+														<Skeleton style={{ width: "100%"}} height={60} />
+													</div>
+												</div>
+											</>
+										) : (
+											<>
+												<div className="flex justify-between md:mb-12 mb-6 relative">
+													<h2 className="md:text-4xl text-2xl font-semibold">EA Sports FC 24 PC Steam Offline EA App</h2>
+													<CloseSVG onClick={() => closeKeyAuthcode()} className="cursor-pointer md:block absolute right-0" />
+												</div>
+												<div className="flex md:flex-row flex-col md:gap-8 mb-6">
 													<div className="mb-4 w-full">
 														<label htmlFor="display_name" className="text-base font-medium">User</label>
 														<div className="flex relative">
 															<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value="THESPAP1" readOnly />
-															<CopySVG className="absolute right-0 mt-7 mr-4"/>
+															<CopySVG className="absolute right-0 mt-7 mr-4" />
 														</div>
 													</div>
 													<div className="mb-4 w-full">
 														<label htmlFor="display_name" className="text-base font-medium">Password</label>
 														<div className="flex relative">
 															<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value="IATAV61G" readOnly />
-															<CopySVG className="absolute right-0 mt-7 mr-4"/>
+															<CopySVG className="absolute right-0 mt-7 mr-4" />
 														</div>
 													</div>
 												</div>
-												<div className="flex gap-30 w-full">
+												<div className="flex md:flex-row flex-col md:gap-30 gap-4 w-full">
 													<div className="gap-2">
 														<h4 className="text-lg font-medium">Order number</h4>
 														<p className="text-lg font-semibold text-white/60">#3098029384012</p>
 													</div>
 													<div className="gap-2">
-														<h4 className="text-lg font-medium">Order number</h4>
-														<p className="text-lg font-semibold text-white/60">#3098029384012</p>
+														<h4 className="text-lg font-medium">Order date</h4>
+														<p className="text-lg font-semibold text-white/60">March 11, 2025</p>
 													</div>
 												</div>
-												<div className="flex gap-6 mt-6">
+												<div className="flex md:flex-row flex-col gap-6 mt-6">
 													<div className="box-shape">
 														<button onClick={() => setConfirmPopupView(false)} className="px-10 bg-[#0BC4E5]  cursor-pointer h-14 shape-outline button-product font-semibold text-[#00D8FF] gap-2">Watch video tutorial</button>
 													</div>
@@ -186,11 +234,13 @@ export default function Library() {
 														<button onClick={() => handleValidateViewKey()} className="px-10 bg-[#0BC4E5] cursor-pointer h-14 shape button-product font-semibold text-black gap-2">Get Authcode</button>
 													</div>
 												</div>
-											</div>
+											</>
+										)}
 										</div>
-									) : (
-										<></>
-									)}
+									</div>
+								) : (
+									<></>
+								)}
 							</li>
 						))}
 					</ul>
@@ -228,7 +278,7 @@ export default function Library() {
 					<></>
 				)}
 
-				
+
 			</div>
 		</>
 	);
