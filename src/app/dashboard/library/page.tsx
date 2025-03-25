@@ -139,7 +139,7 @@ export default function Library() {
 						{products.map((item, index) => (
 							<li key={index} >
 								<div className={`${item.confirmViewKey && item.id == productKeyConfirm ? "bg-cyan-300 p-4 clip-path-element cursor-pointer" : "bg-white/20 p-4 clip-path-element hover:bg-cyan-400 transition cursor-pointer"}`} onClick={() => handleViewProduct(item.id, item.confirmViewKey)}>
-									<Image className="w-full clip-path-element" src={item.src} alt="" />
+									<Image className="hover:brightness-50 transition w-full clip-path-element" src={item.src} alt="" />
 									<div className="relative hidden w-full z-10 ">
 										{/* Dropdown Select */}
 										<button
