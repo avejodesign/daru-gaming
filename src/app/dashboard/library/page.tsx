@@ -36,14 +36,18 @@ type Products = {
 };
 
 export default function Library() {
-	const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 768);
+	const [isMobile, setIsMobile] = useState<boolean>(false);
 	useEffect(() => {
-		const handleResize = () => {
+		if (typeof window !== "undefined") { // Garante que está rodando no cliente
 		  setIsMobile(window.innerWidth <= 768);
-		};
 	
-		window.addEventListener("resize", handleResize);
-		return () => window.removeEventListener("resize", handleResize);
+		  const handleResize = () => {
+			setIsMobile(window.innerWidth <= 768);
+		  };
+	
+		  window.addEventListener("resize", handleResize);
+		  return () => window.removeEventListener("resize", handleResize);
+		}
 	  }, []);
 
 	// Products
