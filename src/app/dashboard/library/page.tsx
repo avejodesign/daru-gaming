@@ -317,7 +317,7 @@ export default function Library() {
 													{item.confirmViewKey ? (
 														<div className="flex md:flex-row flex-col md:gap-8 mb-6">
 															{item.random_key != "" ? (
-																<div className="mb-4 w-1/2">
+																<div className="mb-4 md:w-1/2 w-full">
 																	<label htmlFor="display_name" className="text-base font-medium">Random Key</label>
 																	<div className="flex relative">
 																		<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.random_key} readOnly />
