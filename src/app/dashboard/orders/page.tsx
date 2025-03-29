@@ -1,8 +1,7 @@
 "use client";
 
+import OrderListPurchased from "@/app/components/OrderListPurchased";
 import Tabbar from "@/app/components/Tabbar";
-
-import ChevronDownSVG from "@/assets/chevron-down.svg";
 
 export default function Orders() {
   const orders = [
@@ -13,6 +12,11 @@ export default function Orders() {
       payment: "PIX",
       price: "R$ 167,92",
       status: "Released",
+      purchasedProducts: [
+        "Mortal Kombat X",
+        "LEGO Star Wars: The Force Awakens - Deluxe Edition",
+        "The LEGO Ninjago Movie Video Game",
+      ]
     },
     {
       id: 2,
@@ -21,6 +25,11 @@ export default function Orders() {
       payment: "PIX",
       price: "R$ 167,92",
       status: "Released",
+      purchasedProducts: [
+        "Mortal Kombat X",
+        "LEGO Star Wars: The Force Awakens - Deluxe Edition",
+        "The LEGO Ninjago Movie Video Game",
+      ]
     },
     {
       id: 3,
@@ -29,6 +38,11 @@ export default function Orders() {
       payment: "PIX",
       price: "R$ 167,92",
       status: "Released",
+      purchasedProducts: [
+        "Mortal Kombat X",
+        "LEGO Star Wars: The Force Awakens - Deluxe Edition",
+        "The LEGO Ninjago Movie Video Game",
+      ]
     },
     {
       id: 4,
@@ -37,6 +51,11 @@ export default function Orders() {
       payment: "PIX",
       price: "R$ 167,92",
       status: "Released",
+      purchasedProducts: [
+        "Mortal Kombat X",
+        "LEGO Star Wars: The Force Awakens - Deluxe Edition",
+        "The LEGO Ninjago Movie Video Game",
+      ]
     },
     {
       id: 5,
@@ -45,6 +64,11 @@ export default function Orders() {
       payment: "PIX",
       price: "R$ 167,92",
       status: "Released",
+      purchasedProducts: [
+        "Mortal Kombat X",
+        "LEGO Star Wars: The Force Awakens - Deluxe Edition",
+        "The LEGO Ninjago Movie Video Game",
+      ]
     },
     {
       id: 6,
@@ -53,6 +77,11 @@ export default function Orders() {
       payment: "PIX",
       price: "R$ 167,92",
       status: "Released",
+      purchasedProducts: [
+        "Mortal Kombat X",
+        "LEGO Star Wars: The Force Awakens - Deluxe Edition",
+        "The LEGO Ninjago Movie Video Game",
+      ]
     },
     {
       id: 7,
@@ -61,6 +90,11 @@ export default function Orders() {
       payment: "PIX",
       price: "R$ 167,92",
       status: "Released",
+      purchasedProducts: [
+        "Mortal Kombat X",
+        "LEGO Star Wars: The Force Awakens - Deluxe Edition",
+        "The LEGO Ninjago Movie Video Game",
+      ]
     },
     {
       id: 8,
@@ -69,6 +103,11 @@ export default function Orders() {
       payment: "PIX",
       price: "R$ 167,92",
       status: "Released",
+      purchasedProducts: [
+        "Mortal Kombat X",
+        "LEGO Star Wars: The Force Awakens - Deluxe Edition",
+        "The LEGO Ninjago Movie Video Game",
+      ]
     },
     {
       id: 9,
@@ -77,37 +116,20 @@ export default function Orders() {
       payment: "PIX",
       price: "R$ 167,92",
       status: "Released",
+      purchasedProducts: [
+        "Mortal Kombat X",
+        "LEGO Star Wars: The Force Awakens - Deluxe Edition",
+        "The LEGO Ninjago Movie Video Game",
+      ]
     },
   ];
 
   return (
-    <div className="container md:w-[1100px] w-full mx-auto relative md:px-30 text-white mt-20">
+    <div className="md:w-[1100px] w-full container mx-auto mt-20  relative text-white">
       <div className="md:p-10 p-5 backdrop-blur-md clip-path-element" style={{ background: "rgba(49, 55, 66, 0.80)" }}>
         <Tabbar />
         <div className="flex flex-col gap-6 mt-6">
-          {orders.map((item, index) => (
-            <div key={index} className="bg-white/20 hover:bg-white/40 transition p-6 clip-path-element cursor-pointer">
-              <div className="flex md:flex-row flex-col justify-between relative">
-                <div className="flex-1 md:block md:mb-0 mb-2">
-                  <p className="md:text-lg text-md font-semibold text-white/60">{item.data}</p>
-                  <h4 className="md:text-lg text-md font-medium">{item.id_order}</h4>
-                </div>
-                <div className="flex-1 md:block flex justify-between md:mb-0 mb-2">
-                  <p className="md:text-lg text-md font-semibold text-white/60">Payment</p>
-                  <h4 className="md:text-lg text-md font-medium">{item.payment}</h4>
-                </div>
-                <div className="flex-1 md:block flex justify-between md:mb-0 mb-2">
-                  <p className="md:text-lg text-md font-semibold text-white/60">Price</p>
-                  <h4 className="md:text-lg text-md font-medium">{item.price}</h4>
-                </div>
-                <div className="flex-1 md:block flex justify-between md:mb-0 mb-2">
-                  <p className="md:text-lg text-md font-semibold text-white/60">Status</p>
-                  <h4 className="md:text-lg text-md font-semibold text-green-400">{item.status}</h4>
-                </div>
-                <ChevronDownSVG className="md:block absolute right-0 top-0"/>
-              </div>
-            </div>
-          )) }
+          <OrderListPurchased orders={orders}/>
         </div>
       </div>
     </div>

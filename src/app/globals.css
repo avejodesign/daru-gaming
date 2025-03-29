@@ -270,10 +270,6 @@ body {
 	display: none; /* Remove a barra de rolagem */
 }
 
-.background-product-selected {
-	opacity: 80%;
-
-}
 
 .background-product-selected:before {
 	position: absolute;

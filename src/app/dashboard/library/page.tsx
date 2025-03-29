@@ -9,13 +9,17 @@ import Tabbar from "@/app/components/Tabbar";
 
 import Image, { StaticImageData } from "next/image";
 
-import Image01 from "@/assets/dashboard/image-01.png";
+import Image01 from "@/assets/dashboard/games/image-01.png";
+import Horizontal01 from "@/assets/dashboard/games/horizontal-01.jpg";
 import Background01 from "@/assets/dashboard/games/background-01.jpg";
-import Image02 from "@/assets/dashboard/image-02.png";
+import Image02 from "@/assets/dashboard/games/image-02.png";
+import Horizontal02 from "@/assets/dashboard/games/horizontal-02.jpg";
 import Background02 from "@/assets/dashboard/games/background-02.jpg";
-import Image03 from "@/assets/dashboard/image-03.png";
+import Image03 from "@/assets/dashboard/games/image-03.png";
+import Horizontal03 from "@/assets/dashboard/games/horizontal-03.jpg";
 import Background03 from "@/assets/dashboard/games/background-03.jpg";
-import Image04 from "@/assets/dashboard/image-04.png";
+import Image04 from "@/assets/dashboard/games/image-04.png";
+import Horizontal04 from "@/assets/dashboard/games/horizontal-04.jpg";
 import Background04 from "@/assets/dashboard/games/background-04.jpg";
 
 import CloseSVG from "@/assets/close.svg";
@@ -26,8 +30,10 @@ import StreamLineSVG from "@/assets/streamline.svg";
 type Products = {
 	id: number;
 	src: StaticImageData;
+	horizontal: StaticImageData;
 	background: StaticImageData;
 	name: string;
+	random_key: string;
 	user: string;
 	password: string;
 	order_number: string;
@@ -39,26 +45,28 @@ export default function Library() {
 	const [isMobile, setIsMobile] = useState<boolean>(false);
 	useEffect(() => {
 		if (typeof window !== "undefined") { // Garante que está rodando no cliente
-		  setIsMobile(window.innerWidth <= 768);
-	
-		  const handleResize = () => {
 			setIsMobile(window.innerWidth <= 768);
-		  };
-	
-		  window.addEventListener("resize", handleResize);
-		  return () => window.removeEventListener("resize", handleResize);
+
+			const handleResize = () => {
+				setIsMobile(window.innerWidth <= 768);
+			};
+
+			window.addEventListener("resize", handleResize);
+			return () => window.removeEventListener("resize", handleResize);
 		}
-	  }, []);
+	}, []);
 
 	// Products
 	const [products, setProducts] = useState<Products[]>([
 		{
 			id: 1,
 			src: Image01,
+			horizontal: Horizontal01,
 			background: Background01,
 			name: "EA Sports FC 24 PC Steam Offline EA App",
-			user: "GAMERPRO123",
-			password: "XYS8ZQ7K",
+			random_key: "23DBA-6523D-954MD",
+			user: "",
+			password: "",
 			order_number: "#5123984756123",
 			order_date: "March 20, 2025",
 			confirmViewKey: false,
@@ -66,8 +74,10 @@ export default function Library() {
 		{
 			id: 2,
 			src: Image02,
+			horizontal: Horizontal02,
 			background: Background02,
 			name: "Farming Simulator 25 PC Steam Account Offline",
+			random_key: "",
 			user: "SIMFARMER22",
 			password: "LMN4PQR5",
 			order_number: "#9845632107854",
@@ -77,8 +87,10 @@ export default function Library() {
 		{
 			id: 3,
 			src: Image03,
+			horizontal: Horizontal03,
 			background: Background03,
 			name: "Marvel's Spider-Man 2 Steam Account Offline",
+			random_key: "",
 			user: "WEBWARRIOR99",
 			password: "SPIDEY42X",
 			order_number: "#6758493021576",
@@ -88,10 +100,12 @@ export default function Library() {
 		{
 			id: 4,
 			src: Image04,
+			horizontal: Horizontal04,
 			background: Background04,
 			name: "Red Dead Redemption 2 PC Steam Account Offline",
-			user: "OUTLAWGAMER",
-			password: "RDR2WILDWEST",
+			random_key: "23DBA-6523D-954MD",
+			user: "",
+			password: "",
 			order_number: "#2384756109234",
 			order_date: "March 17, 2025",
 			confirmViewKey: false,
@@ -99,8 +113,10 @@ export default function Library() {
 		{
 			id: 5,
 			src: Image04,
+			horizontal: Horizontal04,
 			background: Background04,
 			name: "Red Dead Redemption 2 PC Steam Account Offline",
+			random_key: "",
 			user: "WESTERNPLAYER",
 			password: "RDR2HUNTER",
 			order_number: "#3456789012456",
@@ -110,8 +126,10 @@ export default function Library() {
 		{
 			id: 6,
 			src: Image03,
+			horizontal: Horizontal03,
 			background: Background03,
 			name: "Marvel's Spider-Man 2 Steam Account Offline",
+			random_key: "",
 			user: "SPIDEYFAN07",
 			password: "VENOMX23",
 			order_number: "#9238475610923",
@@ -121,8 +139,10 @@ export default function Library() {
 		{
 			id: 7,
 			src: Image02,
+			horizontal: Horizontal02,
 			background: Background02,
 			name: "Farming Simulator 25 PC Steam Account Offline",
+			random_key: "",
 			user: "FARMKING88",
 			password: "GROWFAST12",
 			order_number: "#1273649580236",
@@ -132,8 +152,10 @@ export default function Library() {
 		{
 			id: 8,
 			src: Image01,
+			horizontal: Horizontal01,
 			background: Background01,
 			name: "EA Sports FC 24 PC Steam Offline EA App",
+			random_key: "",
 			user: "SOCCERMANIA10",
 			password: "GOALKEEPER77",
 			order_number: "#9087654321876",
@@ -141,14 +163,15 @@ export default function Library() {
 			confirmViewKey: false,
 		},
 	]);
-	
+
+
+	// View Product (Product Selected);
+	const [viewProductSelected, setViewProductSelected] = useState<number>(-1);
+
 	const [backgroundSelectedProduct, setBackgroundSelectedProduct] = useState<StaticImageData | null>(null);
 
-	// Key Confirm (Product Selected);
-	const [productKeyConfirm, setProductKeyConfirm] = useState<number>(1);
-
 	// Key Confirm (Product Select with Key Validated);
-	const [productGetAuthcode, setProductGetAuthcode] = useState<number>(0);
+	const [productSelectKeyValidated, setProductSelectKeyValidated] = useState<number>(0);
 
 	// Loading to Skeleton Working
 	const [loadingState, setLoadingState] = useState(false);
@@ -156,44 +179,61 @@ export default function Library() {
 	// Popup View Key
 	const [confirmPopupView, setConfirmPopupView] = useState<boolean>(false);
 	const popupRef = useRef<HTMLDivElement>(null);
-	
-	function handleViewProduct(id: number, confirmViewKey: boolean, background: StaticImageData) {
-		setLoadingState(false)
-		setProductKeyConfirm(id);
-		setBackgroundSelectedProduct(background);
-		setConfirmPopupView(true);
-		if (confirmViewKey) {
-			if (productGetAuthcode != id) {
-				setProductGetAuthcode(id);
-				setTimeout(() => {
-					setLoadingState(true);
-				}, 1000);
-				console.log(background)
-			} else {
-				setBackgroundSelectedProduct(null);
-				setProductGetAuthcode(0);
-			}
-		}
-	}
 
-	function handleValidateViewKey() {
-		setProducts(products.map(product =>
-			product.id === productKeyConfirm ? { ...product, ["confirmViewKey"]: true } : product
-		));
-		setConfirmPopupView(false);
-		setProductGetAuthcode(productKeyConfirm);
+	function handleViewProduct(id: number, confirmViewKey: boolean, background: StaticImageData) {
+		console.log(id, confirmViewKey, background)
+		setViewProductSelected(id); // 
+		setProductSelectKeyValidated(id); // 
+		setBackgroundSelectedProduct(background); // Change Background
+		setLoadingState(false); // Create Skeleton
 		setTimeout(() => {
 			setLoadingState(true);
 		}, 1000);
-		
+		if (id == viewProductSelected) {
+			closeKeyAuthcode();
+		}
+		// if (confirmViewKey) {
+		// 	if (productSelectKeyValidated != id) {
+		// 		console.log(background)
+		// 	} else {
+		// 		setBackgroundSelectedProduct(null);
+		// 		setProductSelectKeyValidated(0);
+		// 	}
+		// }
 	}
 
 	function closeKeyAuthcode() {
-		setProductKeyConfirm(0);
-		setProductGetAuthcode(-1);
+		setViewProductSelected(-1);
 		setBackgroundSelectedProduct(null);
 		setLoadingState(false);
 	}
+
+	function handleViewKeyCodeButton() {
+		setConfirmPopupView(true);
+	}
+
+	function handleConfirmViewKeyButton() {
+		setProducts(products.map(product =>
+			product.id === viewProductSelected ? { ...product, ["confirmViewKey"]: true } : product
+		));
+		setConfirmPopupView(false);
+	}
+
+
+
+	function handleValidateViewKey() {
+		setProducts(products.map(product =>
+			product.id === viewProductSelected ? { ...product, ["confirmViewKey"]: true } : product
+		));
+		setConfirmPopupView(false);
+		setProductSelectKeyValidated(viewProductSelected);
+		setTimeout(() => {
+			setLoadingState(true);
+		}, 1000);
+
+	}
+
+
 
 	useEffect(() => {
 		function handleClickOutside(event: MouseEvent) {
@@ -219,9 +259,9 @@ export default function Library() {
 			<div className="absolute top-0 left-0 w-full h-120 overflow-hidden">
 				{backgroundSelectedProduct != null ? (
 					<div className="relative background-product-selected h-full">
-							<Image src={backgroundSelectedProduct} alt="" className="h-full w-full object-cover" />
+						<Image src={backgroundSelectedProduct} alt="" className="h-full w-full object-cover" />
 					</div>
-					) : (
+				) : (
 					<></>
 				)}
 			</div>
@@ -229,26 +269,27 @@ export default function Library() {
 				<div className="md:p-10 p-5 backdrop-blur-md clip-path-element" style={{ background: "rgba(49, 55, 66, 0.80)" }}>
 					<Tabbar />
 					<ul className="flex flex-wrap justify-start list-library gap-6 md:px-0 mt-6 relative" >
-						
+
 						{products.map((item, index) => (
-							<li key={index} className={`${productGetAuthcode != item.id && productGetAuthcode == productKeyConfirm ? "opacity-20" : ""}`}>
-									{isMobile ? (
-										<div className={`${productGetAuthcode == item.id ? "bg-cyan-300 p-4 cursor-pointer selected text-black font-semibold" : "bg-white/20 hover:bg-cyan-400 p-4 font-semibold transition cursor-pointer"}`} onClick={() => handleViewProduct(item.id, item.confirmViewKey, item.background)}>
-											<div className="flex">
-												<div className="w-full max-w-20">
-													<Image className="hover:brightness-50 transition w-full h-full object-cover" src={item.background} alt="" />
-												</div>
-												<p className="ml-4">{item.name}</p>
+							<li key={index} className={`${productSelectKeyValidated != item.id && productSelectKeyValidated == viewProductSelected ? "opacity-20" : ""}`}>
+								{isMobile ? (
+									<div className={`${viewProductSelected == item.id ? "bg-cyan-300 p-4 cursor-pointer selected text-black font-semibold" : "bg-white/20 hover:bg-cyan-400 p-4 font-semibold transition cursor-pointer"}`} onClick={() => handleViewProduct(item.id, item.confirmViewKey, item.background)}>
+										<div className="flex">
+											<div className="w-full max-w-20">
+												<Image className="hover:brightness-50 transition w-full h-full object-cover" src={item.horizontal} alt="" />
 											</div>
-										</div>		
-									): (
-										<div className={`${productGetAuthcode == item.id ? "bg-cyan-300 p-3 clip-path-element cursor-pointer selected" : "bg-white/20 p-3 clip-path-element hover:bg-cyan-400 transition cursor-pointer"}`} onClick={() => handleViewProduct(item.id, item.confirmViewKey, item.background)}>
-											<Image className="hover:brightness-50 transition w-full object-cover clip-path-element" style={index > 3 ? { height: 150 } : {}} src={item.src} alt="" />
+											<p className="ml-4">{item.name}</p>
 										</div>
-									)}
-								{productGetAuthcode == productKeyConfirm && item.id == productKeyConfirm ? (
+									</div>
+								) : (
+									<div className={`${viewProductSelected == item.id ? "bg-cyan-300 p-3 clip-path-element cursor-pointer selected" : "bg-white/20 p-3 clip-path-element hover:bg-cyan-400 transition cursor-pointer"}`} onClick={() => handleViewProduct(item.id, item.confirmViewKey, item.background)}>
+										<Image className="hover:brightness-50 transition w-full object-cover clip-path-element" style={index > 3 ? { height: 120 } : {}} src={index < 4 ? item.src : item.horizontal} alt="" />
+									</div>
+								)}
+								{item.id == viewProductSelected ? (
 									<div className="md:h-130 h-180">
 										<div className="absolute md:p-10 p-6 md:mt-8 left-0 z-100 w-full md:border-16 border-10 border-cyan-300 bg-cyan-400/20">
+											{ }
 											{!loadingState ? (
 												<>
 													<div className="md:mb-12 mb-6">
@@ -293,26 +334,52 @@ export default function Library() {
 												</>
 											) : (
 												<>
+
 													<div className="flex justify-between md:mb-12 mb-6 relative">
 														<h2 className="md:text-3xl text-2xl font-semibold md:mr-0 mr-6">{item.name}</h2>
 														<CloseSVG onClick={() => closeKeyAuthcode()} className="cursor-pointer md:block absolute right-0" />
 													</div>
-													<div className="flex md:flex-row flex-col md:gap-8 mb-6">
-														<div className="mb-4 w-full">
-															<label htmlFor="display_name" className="text-base font-medium">User</label>
-															<div className="flex relative">
-																<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.user} readOnly />
-																<CopySVG className="absolute right-0 mt-7 mr-4" />
+													{item.confirmViewKey ? (
+														<div className="flex md:flex-row flex-col md:gap-8 mb-6">
+															{item.random_key != "" ? (
+																<div className="mb-4 w-1/2">
+																	<label htmlFor="display_name" className="text-base font-medium">Random Key</label>
+																	<div className="flex relative">
+																		<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.random_key} readOnly />
+																		<CopySVG className="absolute right-0 mt-7 mr-4" />
+																	</div>
+																</div>
+															) : (
+																<>
+																	<div className="mb-4 w-full">
+																		<label htmlFor="display_name" className="text-base font-medium">User</label>
+																		<div className="flex relative">
+																			<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.user} readOnly />
+																			<CopySVG className="absolute right-0 mt-7 mr-4" />
+																		</div>
+																	</div>
+																	<div className="mb-4 w-full">
+																		<label htmlFor="display_name" className="text-base font-medium">Password</label>
+																		<div className="flex relative">
+																			<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.password} readOnly />
+																			<CopySVG className="absolute right-0 mt-7 mr-4" />
+																		</div>
+																	</div>
+																</>
+															)}
+
+														</div>
+													) : (
+														<div className="flex md:flex-row flex-col md:gap-8 mb-6">
+															<div className="mb-4 w-full max-w-96">
+																<div className="flex relative">
+																	<input id="display_name" className="h-16 transition border text-white/60 border-white/60 focus:border-white/100 w-full p-4  outline-none bg-white/10 focus:bg-white/20 mt-2" value="**********" readOnly />
+																	<button onClick={() => handleViewKeyCodeButton()} className="cursor-pointer absolute right-0 bg-[#0BC4E5] hover:bg-[#86edff] transition py-2 px-4 mt-5 mr-3  text-black font-semibold">View key</button>
+																</div>
 															</div>
 														</div>
-														<div className="mb-4 w-full">
-															<label htmlFor="display_name" className="text-base font-medium">Password</label>
-															<div className="flex relative">
-																<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.password} readOnly />
-																<CopySVG className="absolute right-0 mt-7 mr-4" />
-															</div>
-														</div>
-													</div>
+													)}
+
 													<div className="flex md:flex-row flex-col md:gap-30 gap-4 w-full">
 														<div className="gap-2">
 															<h4 className="text-lg font-medium">Order number</h4>
@@ -345,8 +412,7 @@ export default function Library() {
 
 				</div>
 				{confirmPopupView ? (
-					<div className={`${products[productKeyConfirm - 1].confirmViewKey ? "hidden" : "fixed top-[0] left-[0] w-full bg-black/60 h-full text-white flex justify-center items-center"}`}>
-
+					<div className={`${products[viewProductSelected - 1].confirmViewKey ? "hidden" : "fixed top-[0] left-[0] w-full bg-black/60 h-full text-white flex justify-center items-center"}`}>
 						<div className="bg-[#30434D] clip-path-element md:w-[700px] w-full md:p-8 p-6" ref={popupRef}>
 							<div className="flex justify-between mb-6">
 								<h4 className="text-xl font-semibold">Important Information</h4>
@@ -366,7 +432,7 @@ export default function Library() {
 									<button onClick={() => setConfirmPopupView(false)} className="w-full bg-[#0BC4E5]  cursor-pointer h-14 shape-outline button-product font-semibold text-[#00D8FF] gap-2">Back</button>
 								</div>
 								<div className="box-shape w-full">
-									<button onClick={() => handleValidateViewKey()} className="w-full bg-[#0BC4E5] cursor-pointer h-14 shape button-product font-semibold text-black gap-2">Ok, View key</button>
+									<button onClick={() => handleConfirmViewKeyButton()} className="w-full bg-[#0BC4E5] cursor-pointer h-14 shape button-product font-semibold text-black gap-2">Ok, View key</button>
 								</div>
 							</div>
 						</div>

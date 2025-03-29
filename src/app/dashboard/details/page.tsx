@@ -34,7 +34,7 @@ export default function Details() {
 	}
 
 	return (
-		<div className="md:w-[1100px] w-full container mx-auto mt-20  md:px-30 relative text-white">
+		<div className="md:w-[1100px] w-full container mx-auto mt-20  relative text-white">
 			<div className="md:p-10 p-5 backdrop-blur-md clip-path-element" style={{ background: "rgba(49, 55, 66, 0.80)" }}>
 				<Tabbar />
 				<div className="bg-[#41434B] clip-path-element w-full p-8 mt-10">
