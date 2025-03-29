@@ -164,7 +164,6 @@ export default function Library() {
 		},
 	]);
 
-
 	// View Product (Product Selected);
 	const [viewProductSelected, setViewProductSelected] = useState<number>(-1);
 
@@ -192,14 +191,6 @@ export default function Library() {
 		if (id == viewProductSelected) {
 			closeKeyAuthcode();
 		}
-		// if (confirmViewKey) {
-		// 	if (productSelectKeyValidated != id) {
-		// 		console.log(background)
-		// 	} else {
-		// 		setBackgroundSelectedProduct(null);
-		// 		setProductSelectKeyValidated(0);
-		// 	}
-		// }
 	}
 
 	function closeKeyAuthcode() {
@@ -218,22 +209,6 @@ export default function Library() {
 		));
 		setConfirmPopupView(false);
 	}
-
-
-
-	function handleValidateViewKey() {
-		setProducts(products.map(product =>
-			product.id === viewProductSelected ? { ...product, ["confirmViewKey"]: true } : product
-		));
-		setConfirmPopupView(false);
-		setProductSelectKeyValidated(viewProductSelected);
-		setTimeout(() => {
-			setLoadingState(true);
-		}, 1000);
-
-	}
-
-
 
 	useEffect(() => {
 		function handleClickOutside(event: MouseEvent) {
@@ -392,10 +367,10 @@ export default function Library() {
 													</div>
 													<div className="flex md:flex-row flex-col gap-6 mt-6">
 														<div className="box-shape">
-															<button onClick={() => setConfirmPopupView(false)} className="px-10 bg-[#0BC4E5]  cursor-pointer h-14 shape-outline button-product font-semibold text-[#00D8FF] gap-2">Watch video tutorial</button>
+															<button className="px-10 bg-[#0BC4E5]  cursor-pointer h-14 shape-outline button-product font-semibold text-[#00D8FF] gap-2">Watch video tutorial</button>
 														</div>
 														<div className="box-shape ">
-															<button onClick={() => handleValidateViewKey()} className="px-10 bg-[#0BC4E5] cursor-pointer h-14 shape button-product font-semibold text-black gap-2">Get Authcode</button>
+															<button className="px-10 bg-[#0BC4E5] cursor-pointer h-14 shape button-product font-semibold text-black gap-2">Get Authcode</button>
 														</div>
 													</div>
 												</>
