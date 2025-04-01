@@ -34,6 +34,7 @@ import EpicSVG from "@/assets/dashboard/icons/epic_icon.svg";
 import EaSVG from "@/assets/dashboard/icons/ea_icon.svg";
 import XboxSVG from "@/assets/dashboard/icons/xbox_icon.svg";
 import UbisoftSVG from "@/assets/dashboard/icons/ubisoft_icon.svg";
+import RandomKeySVG from "@/assets/dashboard/icons/random_key.svg";
 
 
 type Products = {
@@ -352,15 +353,17 @@ export default function Library() {
 													{item.confirmViewKey ? (
 														<>
 															{item.random_key && (
-																<div className="flex md:flex-row flex-col md:gap-8 mb-6">
-																	<div className="mb-4 md:w-1/2 w-full">
-																		<label htmlFor="display_name" className="text-base font-medium">Random Key</label>
-																		<div className="flex relative">
-																			<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.random_key} readOnly />
-																			<CopySVG className="absolute right-0 mt-7 mr-4" />
+																<>
+																	<div className="flex md:flex-row flex-col md:gap-8 mb-6">
+																		<div className="mb-4 md:w-1/2 w-full">
+																			<label htmlFor="display_name" className="text-base font-medium flex items-center"><RandomKeySVG className="mr-2"/> Random Key</label>
+																			<div className="flex relative">
+																				<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.random_key} readOnly />
+																				<CopySVG className="absolute right-0 mt-7 mr-4" />
+																			</div>
 																		</div>
 																	</div>
-																</div>
+																</>
 															)}
 
 															{item.user_steam && (
