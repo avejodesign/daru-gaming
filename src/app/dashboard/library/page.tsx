@@ -33,6 +33,7 @@ import RockstarSVG from "@/assets/dashboard/icons/rockstar_icon.svg";
 import EpicSVG from "@/assets/dashboard/icons/epic_icon.svg";
 import EaSVG from "@/assets/dashboard/icons/ea_icon.svg";
 import XboxSVG from "@/assets/dashboard/icons/xbox_icon.svg";
+import UbisoftSVG from "@/assets/dashboard/icons/ubisoft_icon.svg";
 
 
 type Products = {
@@ -57,6 +58,8 @@ type Products = {
 	password_ea?: string;
 	user_xbox?: string;
 	password_xbox?: string;
+	user_ubisoft?: string;
+	password_ubisoft?: string;
 };
 
 export default function Library() {
@@ -459,6 +462,27 @@ export default function Library() {
 																			<label htmlFor="display_name" className="text-base font-medium">Password</label>
 																			<div className="flex relative">
 																				<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.user_xbox} readOnly />
+																				<CopySVG className="absolute right-0 mt-7 mr-4" />
+																			</div>
+																		</div>
+																	</div>
+																</>
+															)}
+															{item.user_ubisoft && (
+																<>
+																	<p className="text-lg font-medium mb-2 flex items-center"><UbisoftSVG className="mr-2"/>Ubisoft Connect Login</p>
+																	<div className="flex md:flex-row flex-col md:gap-8 mb-6">
+																		<div className="mb-4 w-full">
+																			<label htmlFor="display_name" className="text-base font-medium">User</label>
+																			<div className="flex relative">
+																				<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.user_ubisoft} readOnly />
+																				<CopySVG className="absolute right-0 mt-7 mr-4" />
+																			</div>
+																		</div>
+																		<div className="mb-4 w-full">
+																			<label htmlFor="display_name" className="text-base font-medium">Password</label>
+																			<div className="flex relative">
+																				<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.user_ubisoft} readOnly />
 																				<CopySVG className="absolute right-0 mt-7 mr-4" />
 																			</div>
 																		</div>
