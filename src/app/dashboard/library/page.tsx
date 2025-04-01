@@ -27,21 +27,42 @@ import CopySVG from "@/assets/dashboard/copy.svg";
 import AlertIcon from "@/assets/alert-icon.png"
 import StreamLineSVG from "@/assets/streamline.svg";
 
+// Lojas 
+import SteamSVG from "@/assets/dashboard/icons/steam_icon.svg";
+import RockstarSVG from "@/assets/dashboard/icons/rockstar_icon.svg";
+import EpicSVG from "@/assets/dashboard/icons/epic_icon.svg";
+import EaSVG from "@/assets/dashboard/icons/ea_icon.svg";
+import XboxSVG from "@/assets/dashboard/icons/xbox_icon.svg";
+
+
 type Products = {
 	id: number;
 	src: StaticImageData;
 	horizontal: StaticImageData;
 	background: StaticImageData;
 	name: string;
-	random_key: string;
-	user: string;
-	password: string;
 	order_number: string;
 	order_date: string;
 	confirmViewKey: boolean;
+
+	// Campos opcionais (não precisam estar presentes em todos os objetos)
+	random_key?: string;
+	user_steam?: string;
+	password_steam?: string;
+	user_rockstar?: string;
+	password_rockstar?: string;
+	user_epic?: string;
+	password_epic?: string;
+	user_ea?: string;
+	password_ea?: string;
+	user_xbox?: string;
+	password_xbox?: string;
 };
 
 export default function Library() {
+	const elementRef = useRef<HTMLDivElement>(null);
+	const [height, setHeight] = useState<number>(0);
+
 	const [isMobile, setIsMobile] = useState<boolean>(false);
 	useEffect(() => {
 		if (typeof window !== "undefined") { // Garante que está rodando no cliente
@@ -64,9 +85,10 @@ export default function Library() {
 			horizontal: Horizontal01,
 			background: Background01,
 			name: "EA Sports FC 24 PC Steam Offline EA App",
-			random_key: "23DBA-6523D-954MD",
-			user: "",
-			password: "",
+			user_steam: "SIMFARMER22",
+			password_steam: "LMN4PQR5",
+			user_ea: "SIMFARMER22",
+			password_ea: "LMN4PQR5",
 			order_number: "#5123984756123",
 			order_date: "March 20, 2025",
 			confirmViewKey: false,
@@ -77,9 +99,10 @@ export default function Library() {
 			horizontal: Horizontal02,
 			background: Background02,
 			name: "Farming Simulator 25 PC Steam Account Offline",
-			random_key: "",
-			user: "SIMFARMER22",
-			password: "LMN4PQR5",
+			user_steam: "SIMFARMER22",
+			password_steam: "LMN4PQR5",
+			user_epic: "SIMFARMER22",
+			password_epic: "LMN4PQR5",
 			order_number: "#9845632107854",
 			order_date: "March 19, 2025",
 			confirmViewKey: false,
@@ -90,9 +113,7 @@ export default function Library() {
 			horizontal: Horizontal03,
 			background: Background03,
 			name: "Marvel's Spider-Man 2 Steam Account Offline",
-			random_key: "",
-			user: "WEBWARRIOR99",
-			password: "SPIDEY42X",
+			random_key: "23DBA-6523D-954MD",
 			order_number: "#6758493021576",
 			order_date: "March 18, 2025",
 			confirmViewKey: false,
@@ -103,9 +124,8 @@ export default function Library() {
 			horizontal: Horizontal04,
 			background: Background04,
 			name: "Red Dead Redemption 2 PC Steam Account Offline",
-			random_key: "23DBA-6523D-954MD",
-			user: "",
-			password: "",
+			user_rockstar: "SIMFARMER22",
+			password_rockstar: "LMN4PQR5",
 			order_number: "#2384756109234",
 			order_date: "March 17, 2025",
 			confirmViewKey: false,
@@ -116,9 +136,8 @@ export default function Library() {
 			horizontal: Horizontal04,
 			background: Background04,
 			name: "Red Dead Redemption 2 PC Steam Account Offline",
-			random_key: "",
-			user: "WESTERNPLAYER",
-			password: "RDR2HUNTER",
+			user_steam: "WESTERNPLAYER",
+			password_steam: "RDR2HUNTER",
 			order_number: "#3456789012456",
 			order_date: "March 16, 2025",
 			confirmViewKey: false,
@@ -129,9 +148,8 @@ export default function Library() {
 			horizontal: Horizontal03,
 			background: Background03,
 			name: "Marvel's Spider-Man 2 Steam Account Offline",
-			random_key: "",
-			user: "SPIDEYFAN07",
-			password: "VENOMX23",
+			user_steam: "SPIDEYFAN07",
+			password_steam: "VENOMX23",
 			order_number: "#9238475610923",
 			order_date: "March 15, 2025",
 			confirmViewKey: false,
@@ -142,9 +160,8 @@ export default function Library() {
 			horizontal: Horizontal02,
 			background: Background02,
 			name: "Farming Simulator 25 PC Steam Account Offline",
-			random_key: "",
-			user: "FARMKING88",
-			password: "GROWFAST12",
+			user_steam: "FARMKING88",
+			password_steam: "GROWFAST12",
 			order_number: "#1273649580236",
 			order_date: "March 14, 2025",
 			confirmViewKey: false,
@@ -155,9 +172,8 @@ export default function Library() {
 			horizontal: Horizontal01,
 			background: Background01,
 			name: "EA Sports FC 24 PC Steam Offline EA App",
-			random_key: "",
-			user: "SOCCERMANIA10",
-			password: "GOALKEEPER77",
+			user_steam: "SOCCERMANIA10",
+			password_steam: "GOALKEEPER77",
 			order_number: "#9087654321876",
 			order_date: "March 13, 2025",
 			confirmViewKey: false,
@@ -179,8 +195,9 @@ export default function Library() {
 	const [confirmPopupView, setConfirmPopupView] = useState<boolean>(false);
 	const popupRef = useRef<HTMLDivElement>(null);
 
+
+
 	function handleViewProduct(id: number, confirmViewKey: boolean, background: StaticImageData) {
-		console.log(id, confirmViewKey, background)
 		setViewProductSelected(id); // 
 		setProductSelectKeyValidated(id); // 
 		setBackgroundSelectedProduct(background); // Change Background
@@ -229,6 +246,23 @@ export default function Library() {
 		};
 	}, [confirmPopupView]);
 
+
+	// Handle Height Box View Informations Product
+	useEffect(() => {
+		if (!elementRef.current) return;
+
+		const observer = new ResizeObserver(() => {
+			if (elementRef.current) {
+				const offHeight = elementRef.current?.offsetHeight + 40;
+				setHeight(offHeight || 0);
+			}
+		});
+
+		observer.observe(elementRef.current);
+
+		return () => observer.disconnect();
+	}, [viewProductSelected]);
+
 	return (
 		<>
 			<div className="absolute top-0 left-0 w-full h-120 overflow-hidden">
@@ -262,9 +296,8 @@ export default function Library() {
 									</div>
 								)}
 								{item.id == viewProductSelected ? (
-									<div className="md:h-130 h-180">
-										<div className="absolute md:p-10 p-6 md:mt-8 left-0 z-100 w-full md:border-16 border-10 border-cyan-300 bg-cyan-400/20">
-											{ }
+									<div style={{ height: height }}>
+										<div ref={elementRef} className="absolute md:p-10 p-6 md:mt-8 left-0 z-100 w-full md:border-16 border-10 border-cyan-300 bg-cyan-400/20">
 											{!loadingState ? (
 												<>
 													<div className="md:mb-12 mb-6">
@@ -308,42 +341,131 @@ export default function Library() {
 													</div>
 												</>
 											) : (
-												<>
-
-													<div className="flex justify-between md:mb-12 mb-6 relative">
-														<h2 className="md:text-3xl text-2xl font-semibold md:mr-0 mr-6">{item.name}</h2>
+												<div >
+													<div className="flex justify-between md:mb-8 mb-6 relative">
+														<h2 className="md:text-3xl text-2xl font-semibold md:mr-0 mr-6">{item.name} {height}</h2>
 														<CloseSVG onClick={() => closeKeyAuthcode()} className="cursor-pointer md:block absolute right-0" />
 													</div>
 													{item.confirmViewKey ? (
-														<div className="flex md:flex-row flex-col md:gap-8 mb-6">
-															{item.random_key != "" ? (
-																<div className="mb-4 md:w-1/2 w-full">
-																	<label htmlFor="display_name" className="text-base font-medium">Random Key</label>
-																	<div className="flex relative">
-																		<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.random_key} readOnly />
-																		<CopySVG className="absolute right-0 mt-7 mr-4" />
-																	</div>
-																</div>
-															) : (
-																<>
-																	<div className="mb-4 w-full">
-																		<label htmlFor="display_name" className="text-base font-medium">User</label>
+														<>
+															{item.random_key && (
+																<div className="flex md:flex-row flex-col md:gap-8 mb-6">
+																	<div className="mb-4 md:w-1/2 w-full">
+																		<label htmlFor="display_name" className="text-base font-medium">Random Key</label>
 																		<div className="flex relative">
-																			<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.user} readOnly />
+																			<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.random_key} readOnly />
 																			<CopySVG className="absolute right-0 mt-7 mr-4" />
 																		</div>
 																	</div>
-																	<div className="mb-4 w-full">
-																		<label htmlFor="display_name" className="text-base font-medium">Password</label>
-																		<div className="flex relative">
-																			<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.password} readOnly />
-																			<CopySVG className="absolute right-0 mt-7 mr-4" />
+																</div>
+															)}
+
+															{item.user_steam && (
+																<>
+																	<p className="text-lg font-medium mb-2 flex items-center"><SteamSVG className="mr-2"/> Steam Login</p>
+																	<div className="flex md:flex-row flex-col md:gap-8 mb-2">
+																		<div className="mb-4 w-full">
+																			<label htmlFor="display_name" className="text-base font-medium">User</label>
+																			<div className="flex relative">
+																				<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.user_steam} readOnly />
+																				<CopySVG className="absolute right-0 mt-7 mr-4" />
+																			</div>
+																		</div>
+																		<div className="mb-4 w-full">
+																			<label htmlFor="display_name" className="text-base font-medium">Password</label>
+																			<div className="flex relative">
+																				<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.password_steam} readOnly />
+																				<CopySVG className="absolute right-0 mt-7 mr-4" />
+																			</div>
 																		</div>
 																	</div>
 																</>
 															)}
-
-														</div>
+															{item.user_rockstar && (
+																<>
+																	<p className="text-lg font-medium mb-2 flex items-center"><RockstarSVG className="mr-2"/>Rockstar Games Login</p>
+																	<div className="flex md:flex-row flex-col md:gap-8 mb-6">
+																		<div className="mb-4 w-full">
+																			<label htmlFor="display_name" className="text-base font-medium">User</label>
+																			<div className="flex relative">
+																				<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.user_rockstar} readOnly />
+																				<CopySVG className="absolute right-0 mt-7 mr-4" />
+																			</div>
+																		</div>
+																		<div className="mb-4 w-full">
+																			<label htmlFor="display_name" className="text-base font-medium">Password</label>
+																			<div className="flex relative">
+																				<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.user_rockstar} readOnly />
+																				<CopySVG className="absolute right-0 mt-7 mr-4" />
+																			</div>
+																		</div>
+																	</div>
+																</>
+															)}
+															{item.user_epic && (
+																<>
+																	<p className="text-lg font-medium mb-2 flex items-center"><EpicSVG className="mr-2"/>Epic Games Login</p>
+																	<div className="flex md:flex-row flex-col md:gap-8 mb-6">
+																		<div className="mb-4 w-full">
+																			<label htmlFor="display_name" className="text-base font-medium">User</label>
+																			<div className="flex relative">
+																				<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.user_epic} readOnly />
+																				<CopySVG className="absolute right-0 mt-7 mr-4" />
+																			</div>
+																		</div>
+																		<div className="mb-4 w-full">
+																			<label htmlFor="display_name" className="text-base font-medium">Password</label>
+																			<div className="flex relative">
+																				<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.user_epic} readOnly />
+																				<CopySVG className="absolute right-0 mt-7 mr-4" />
+																			</div>
+																		</div>
+																	</div>
+																</>
+															)}
+															{item.user_ea && (
+																<>
+																	<p className="text-lg font-medium mb-2 flex items-center"><EaSVG className="mr-2"/>EA Sport Login</p>
+																	<div className="flex md:flex-row flex-col md:gap-8 mb-6">
+																		<div className="mb-4 w-full">
+																			<label htmlFor="display_name" className="text-base font-medium">User</label>
+																			<div className="flex relative">
+																				<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.user_ea} readOnly />
+																				<CopySVG className="absolute right-0 mt-7 mr-4" />
+																			</div>
+																		</div>
+																		<div className="mb-4 w-full">
+																			<label htmlFor="display_name" className="text-base font-medium">Password</label>
+																			<div className="flex relative">
+																				<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.user_ea} readOnly />
+																				<CopySVG className="absolute right-0 mt-7 mr-4" />
+																			</div>
+																		</div>
+																	</div>
+																</>
+															)}
+															{item.user_xbox && (
+																<>
+																	<p className="text-lg font-medium mb-2 flex items-center"><XboxSVG className="mr-2"/>Xbox Login</p>
+																	<div className="flex md:flex-row flex-col md:gap-8 mb-6">
+																		<div className="mb-4 w-full">
+																			<label htmlFor="display_name" className="text-base font-medium">User</label>
+																			<div className="flex relative">
+																				<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.user_xbox} readOnly />
+																				<CopySVG className="absolute right-0 mt-7 mr-4" />
+																			</div>
+																		</div>
+																		<div className="mb-4 w-full">
+																			<label htmlFor="display_name" className="text-base font-medium">Password</label>
+																			<div className="flex relative">
+																				<input id="display_name" className="h-16 transition border border-white/60 focus:border-white/100 w-full p-4 font-medium outline-none bg-white/10 focus:bg-white/20 mt-2" value={item.user_xbox} readOnly />
+																				<CopySVG className="absolute right-0 mt-7 mr-4" />
+																			</div>
+																		</div>
+																	</div>
+																</>
+															)}
+														</>
 													) : (
 														<div className="flex md:flex-row flex-col md:gap-8 mb-6">
 															<div className="mb-4 w-full max-w-96">
@@ -373,7 +495,7 @@ export default function Library() {
 															<button className="px-10 bg-[#0BC4E5] cursor-pointer h-14 shape button-product font-semibold text-black gap-2">Get Authcode</button>
 														</div>
 													</div>
-												</>
+												</div>
 											)}
 										</div>
 									</div>
