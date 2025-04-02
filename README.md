@@ -62,4 +62,18 @@ Adicione as opções na `const dropdownItems` assim as opções iram aparecer no
         ></iframe>
     </div>
 </SwiperSlide>
-`
+```
+
+## 4. Passos para adicionar novas telas ao projeto:
+
+#### a. Vá até a pasta `/dashboard`, lá estará todas as telas do dashboard para exportar ao projeto.
+
+#### b. Vá até a pasta `/about`, lá estará também a pagina sobre do projeto.
+
+#### c. Nos assets foram atualizadas novas na pasta `dashboard`.
+
+#### d. Vá em globals.css e copie novamente o arquivo para atualizar o projeto com os novos visuais globais.
+
+#### e. Foram adicionado novos components como `OderListPurchased` e `Tabbar`, copie-os e envie para o novo projeto.
+
+#### f. Adicionar nova dependencia `react-loading-skeleton` basta inserir `npm install react-loading-skeleton` ou `yarn add react-loading-skeleton`
